@@ -6,6 +6,75 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+
+
+
+
+
+
+
+
+
+
+
+
     </style>
+    <style name="CustomToolBar" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:background">@color/denNhat</item>
+
+        <item name="actionOverflowMenuStyle">@style/OverflowMenu</item>
+        <!--goi custom background menu-->
+        <item name="actionOverflowButtonStyle">@style/DotsDarkTheme</item>
+        <!--goi doi mau tittle menu-->
+        <item name="android:itemTextAppearance">@style/myCustomMenuTextApearance</item>
+        <!-- Change style of SeachView -->
+
+
+        <item name="drawerArrowStyle">@style/MaterialDrawer.DrawerArrowStyle</item>
+
+
+        <item name="colorControlNormal">@color/white</item>
+        <item name="colorControlActivated">@color/white</item>
+        <item name="android:maxWidth">10000dp</item>
+
+        <item name="android:editTextColor">@android:color/white</item>
+        <item name="android:textColorHint">@android:color/white</item>
+    </style>
+
+    <!--doi mau tittle menu-->
+    <style name="myCustomMenuTextApearance" parent="@android:style/TextAppearance.Widget.IconMenu.Item">
+        <item name="android:textColor">@android:color/white</item>
+    </style>
+    <!--custom background menu-->
+    <style name="OverflowMenu" parent="Widget.AppCompat.PopupMenu.Overflow">
+        <item name="overlapAnchor">false</item>
+        <item name="android:dropDownVerticalOffset">3.0dp</item>
+        <item name="android:actionMenuTextColor">@color/white</item>
+
+    </style>
+
+
+    <!-- change menu 3 cham thanh mau trang -->
+    <style name="DotsDarkTheme" parent="@style/Widget.AppCompat.ActionButton.Overflow" >
+        <item name="android:tint">@color/white</item>
+    </style>
+    <!-- Change icon drop spinner -->
+    <style name="ActionBarThemeOverlay" parent="">
+        <item name="android:textColorPrimary">#ffffff</item>
+        <item name="colorControlNormal">#ffffff</item>
+        <item name="colorControlHighlight">#ff33b5e5</item>
+    </style>
+
+    <style name="Widget.MyTheme.HeaderBar.Spinner" parent="Widget.AppCompat.Light.Spinner.DropDown.ActionBar">
+        <item name="android:theme">@style/ActionBarThemeOverlay</item>
+    </style>
+    <!-- Change color cua menu 3 soc -->
+    <style name="MaterialDrawer.DrawerArrowStyle" parent="Widget.AppCompat.DrawerArrowToggle">
+        <item name="spinBars">false</item>
+        <item name="color">@android:color/white</item>
+    </style>
+
+
+
 
 </resources>
