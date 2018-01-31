@@ -5,14 +5,23 @@ package com.framgia.mavel;
  */
 
 public class HeroMarvel {
-    private String nameOfHero,imageHero,descriptionOfHero ;
+    private String id,nameOfHero,imageHero,descriptionOfHero ;
 
     public HeroMarvel() {
 
     }
 
-    public HeroMarvel(String nameOfHero, String imageHero, String descriptionOfHero) {
+    public String getId() {
+        return id;
+    }
 
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public HeroMarvel(String id, String nameOfHero, String imageHero, String descriptionOfHero) {
+
+        this.id = id;
         this.nameOfHero = nameOfHero;
         this.imageHero = imageHero;
         this.descriptionOfHero = descriptionOfHero;
