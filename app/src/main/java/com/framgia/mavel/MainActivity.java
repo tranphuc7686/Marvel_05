@@ -76,7 +76,6 @@ this.mContext = mContext;
                 while((dong = bufferedReader.readLine()) !=null){
                     duLieu.append(dong);
 
-
                 }
 
                 mInputStream.close();
