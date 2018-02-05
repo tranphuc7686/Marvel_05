@@ -1,9 +1,9 @@
 package com.framgia.mavel;
 
-import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -11,13 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
+import java.util.ArrayList;
 
 /**
  * Created by Admin on 31/01/2018.
@@ -27,6 +21,7 @@ public class FragmentListHero extends Fragment {
     private RecyclerviewAdaper mRecycleviewAdaper;
     private RecyclerView mRecyclerView;
     private ProgressBar mProgressBar;
+    public static ArrayList<HeroMarvel> dataHeroJson;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -34,8 +29,8 @@ public class FragmentListHero extends Fragment {
         mRecyclerView = view.findViewById(R.id.mListHero);
         mProgressBar = view.findViewById(R.id.progressLoadData);
         // create recyclerview
-        ProcessGetDataJson processGetDataJson = new ProcessGetDataJson(getContext());
-        processGetDataJson.execute("http://gateway.marvel.com/v1/public/comics?ts=1&apikey=b97eaf6930abef3f4d3b6560be8d1957&hash=e543b1ad490af1740ad8c83fbaa55eb2");
+         new ProcessData().execute();
+
 
 
 
@@ -43,72 +38,34 @@ public class FragmentListHero extends Fragment {
 
         return view;
     }
-    class ProcessGetDataJson extends AsyncTask<String,Void,String> {
-        private Context mContext;
+    class ProcessData extends AsyncTask<Void,Void,ArrayList<HeroMarvel>>{
+        private SqliteHelper mSqliteHelper ;
 
+        @Override
+        protected ArrayList<HeroMarvel> doInBackground(Void... voids) {
+            mSqliteHelper = new SqliteHelper((AppCompatActivity)getActivity());
+            mSqliteHelper.creatDatabase();
 
-        public ProcessGetDataJson(Context mContext) {
-            this.mContext = mContext;
+            return  mSqliteHelper.getAllHero();
         }
 
         @Override
-        protected String doInBackground(String... strings) {
-            StringBuilder duLieu=null;
-            try {
-                URL mURL = new URL(strings[0]);
-                HttpURLConnection mHttpURLConnection = (HttpURLConnection) mURL.openConnection();
-                InputStream mInputStream = mHttpURLConnection.getInputStream();
-                InputStreamReader reader = new InputStreamReader(mInputStream);
-                BufferedReader bufferedReader = new BufferedReader(reader);
-                String dong = "";
-                duLieu = new StringBuilder();
-                while((dong = bufferedReader.readLine()) !=null){
-                    duLieu.append(dong);
-
-
-                }
-
-                mInputStream.close();
-                reader.close();
-                bufferedReader.close();
-
-
-
-
-            } catch (MalformedURLException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-
-
-            return duLieu.toString();
-
-
-
-
-
-        }
-
-        @Override
-        protected void onPostExecute(String s) {
-            super.onPostExecute(s);
-
-
-            ParseDataJson parseDataJson = new ParseDataJson();
-
+        protected void onPostExecute(ArrayList<HeroMarvel> heroMarvels) {
+            super.onPostExecute(heroMarvels);
             // create recycleview
-            mRecycleviewAdaper = new RecyclerviewAdaper( parseDataJson.getData(s),mContext);
+            mSqliteHelper.closeDatabase();
+            mRecycleviewAdaper = new RecyclerviewAdaper(heroMarvels,getActivity().getBaseContext(),(AppCompatActivity)getActivity());
 
 
 
-            mRecyclerView.setLayoutManager(new GridLayoutManager(mContext, 2));
+            mRecyclerView.setLayoutManager(new GridLayoutManager(getActivity().getBaseContext(), 2));
             mRecyclerView.setAdapter(mRecycleviewAdaper);
             mProgressBar.setVisibility(View.INVISIBLE);
 
 
 
-
         }
     }
+
+
 }

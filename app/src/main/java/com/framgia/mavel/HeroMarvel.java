@@ -5,10 +5,26 @@ package com.framgia.mavel;
  */
 
 public class HeroMarvel {
-    private String id,nameOfHero,imageHero,descriptionOfHero ;
+    private String id,nameOfHero,imageHero,descriptionOfHero,isFav ;
 
     public HeroMarvel() {
 
+    }
+
+    public HeroMarvel(String id, String nameOfHero, String imageHero, String descriptionOfHero) {
+        this.id = id;
+        this.nameOfHero = nameOfHero;
+        this.imageHero = imageHero;
+        this.descriptionOfHero = descriptionOfHero;
+    }
+
+    public String getIsFav() {
+
+        return isFav;
+    }
+
+    public void setIsFav(String isFav) {
+        this.isFav = isFav;
     }
 
     public String getId() {
@@ -19,12 +35,13 @@ public class HeroMarvel {
         this.id = id;
     }
 
-    public HeroMarvel(String id, String nameOfHero, String imageHero, String descriptionOfHero) {
+    public HeroMarvel(String id, String nameOfHero, String imageHero, String descriptionOfHero,String isFav ) {
 
         this.id = id;
         this.nameOfHero = nameOfHero;
         this.imageHero = imageHero;
         this.descriptionOfHero = descriptionOfHero;
+        this.isFav = isFav;
     }
 
     public String getNameOfHero() {

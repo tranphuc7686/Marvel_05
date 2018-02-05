@@ -21,6 +21,7 @@ public class ViewPaperAdapter extends FragmentStatePagerAdapter {
             case 0:
             {
                 frag = new FragmentListHero();
+
                 break;
             }
             case 1:
