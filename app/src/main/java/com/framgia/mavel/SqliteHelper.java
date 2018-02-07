@@ -96,7 +96,25 @@ public class SqliteHelper {
         else
         {
             Toast.makeText(mAppCompatActivity.getBaseContext(),"Like",Toast.LENGTH_SHORT).show();
+            checkDataDatabase();
             System.out.println("Like thanh cong");
+        }
+
+
+    }
+    public void insertDontLikeHero(String valueIDHero){
+        contentValues = new ContentValues();
+        contentValues.put("ISFAV","");
+        int isTrue = mSqLiteDatabase.update("HEROFAV",contentValues,"IDHERO=?",new String[]{valueIDHero});
+        if( isTrue== 0 ){
+            Toast.makeText(mAppCompatActivity.getBaseContext(),"Lỗi Hệ Thống ",Toast.LENGTH_SHORT).show();
+            System.out.println("Like that bai");
+        }
+        else
+        {
+            Toast.makeText(mAppCompatActivity.getBaseContext()," Đã Bỏ Like",Toast.LENGTH_SHORT).show();
+            checkDataDatabase();
+
         }
 
 
@@ -111,6 +129,8 @@ public class SqliteHelper {
                       contentValues.put("NAMEHERO",a.getNameOfHero());
                       contentValues.put("IMAGEHERO",a.getImageHero());
                       contentValues.put("MOTAHERO",a.getDescriptionOfHero());
+                        contentValues.put("ISFAV","");
+
                   int id = (int) mSqLiteDatabase.insertWithOnConflict("HEROFAV",null,contentValues,SQLiteDatabase.CONFLICT_IGNORE);
 
                   if (id == -1) {
@@ -172,7 +192,8 @@ public class SqliteHelper {
 
 
 
-            arrHeroMarvel.add(new HeroMarvel(c.getString(0),c.getString(1),c.getString(2),c.getString(3),""));
+            arrHeroMarvel.add(new HeroMarvel(c.getString(0),c.getString(1),c.getString(2),c.getString(3),c.getString(4)));
+            System.out.println(c.getString(0)+" "+c.getString(1)+" "+c.getString(2)+" "+c.getString(3)+" "+c.getString(4) + " List Hero chạy");
 
             c.moveToNext();
 
@@ -186,6 +207,24 @@ public class SqliteHelper {
     }
     public void closeDatabase(){
         this.mSqLiteDatabase.close();
+    }
+    public void checkDataDatabase(){
+        Cursor c = mSqLiteDatabase.query("HEROFAV",null,null,null,null,null,null);
+        c.moveToFirst();
+
+        while (!c.isAfterLast())
+        {
+
+
+
+
+            System.out.println(c.getString(0)+" "+c.getString(1)+" "+c.getString(2)+" "+c.getString(3)+" "+c.getString(4) + "  Main chay");
+
+            c.moveToNext();
+
+        }
+        System.out.println("--------------------------------------------------------------------------");
+        c.close();
     }
 
 }

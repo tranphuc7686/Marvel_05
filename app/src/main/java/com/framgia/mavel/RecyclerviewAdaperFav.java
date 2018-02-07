@@ -18,14 +18,14 @@ import java.util.ArrayList;
  * Created by Admin on 31/01/2018.
  */
 
-public class RecyclerviewAdaper extends RecyclerView.Adapter<RecyclerviewAdaper.RecyclerViewHolder>{
+public class RecyclerviewAdaperFav extends RecyclerView.Adapter<RecyclerviewAdaperFav.RecyclerViewHolder>{
 
     private ArrayList<HeroMarvel> data = new ArrayList<>();
     private Context context;
     private SqliteHelper mSqliteHelper;
     private AppCompatActivity mAppCompatActivity;
 
-    public RecyclerviewAdaper(ArrayList<HeroMarvel> data,Context context,AppCompatActivity appCompatActivity) {
+    public RecyclerviewAdaperFav(ArrayList<HeroMarvel> data, Context context, AppCompatActivity appCompatActivity) {
         this.data = data;
         this.context= context;
         this.mAppCompatActivity = appCompatActivity;
@@ -43,15 +43,11 @@ public class RecyclerviewAdaper extends RecyclerView.Adapter<RecyclerviewAdaper.
     @Override
     public void onBindViewHolder(final RecyclerViewHolder holder, final int position) {
         holder.isRecyclable();
-
         if(data.get(position).getIsFav().compareTo("FAV")==0){
             holder.favIcon.setVisibility(View.VISIBLE);
-
         }
-        else
-            holder.favIcon.setVisibility(View.INVISIBLE);
         holder.mNameOfHero.setText(data.get(position).getNameOfHero());
-        String path = data.get(position).getImageHero()+"/landscape_medium.jpg";
+        String path = data.get(position).getImageHero()+"/standard_fantastic.jpg";
 
         Picasso.with(context)
                 .load(path)
@@ -66,27 +62,13 @@ public class RecyclerviewAdaper extends RecyclerView.Adapter<RecyclerviewAdaper.
         holder.imageHero.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View view) {
-                if(data.get(position).getIsFav().compareTo("FAV")==0)
-                {
-                    mSqliteHelper.insertDontLikeHero(data.get(position).getId());
-                    Toast.makeText(view.getContext(),"Đã bỏ thích : "+data.get(position).getNameOfHero(),Toast.LENGTH_SHORT).show();
-                    data.get(position).setIsFav("");
-                    holder.favIcon.setVisibility(View.INVISIBLE);
 
-                }
-                else
-                {
-                    mSqliteHelper.insertLikeHero(data.get(position).getId());
-                    Toast.makeText(view.getContext(),"Đã thích : "+data.get(position).getNameOfHero(),Toast.LENGTH_SHORT).show();
-                    data.get(position).setIsFav("FAV");
-                    holder.favIcon.setVisibility(View.VISIBLE);
-
-                }
-
+                mSqliteHelper.insertLikeHero(data.get(position).getId());
+                Toast.makeText(view.getContext(),"Đã thích : "+data.get(position).getNameOfHero(),Toast.LENGTH_SHORT).show();
+                holder.favIcon.setVisibility(View.VISIBLE);
                 return true;
             }
         });
-
 
     }
 
@@ -109,6 +91,5 @@ public class RecyclerviewAdaper extends RecyclerView.Adapter<RecyclerviewAdaper.
 
         }
     }
-
 }
 

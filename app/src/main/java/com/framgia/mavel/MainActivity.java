@@ -3,7 +3,6 @@ package com.framgia.mavel;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
-import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -108,29 +107,43 @@ this.mContext = mContext;
         @Override
         protected void onPostExecute(final String s) {
             super.onPostExecute(s);
-            mVideoView.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
-                @Override
-                public void onCompletion(MediaPlayer mediaPlayer) {
-
-
-                    mProgressBar.setVisibility(View.VISIBLE);
-                    ParseDataJson parseDataJson = new ParseDataJson();
-
-                    SqliteHelper mSqliteHelper = new SqliteHelper(mAppCompatActivity);
-                    mSqliteHelper.creatDatabase();
-//                    mSqliteHelper.createTable();
-                    mSqliteHelper.insertAllHero(parseDataJson.getData(s));
-                    mSqliteHelper.closeDatabase();
-
-                    Intent getActivityCharacter = new Intent(mContext,CharacterHeroActivity.class);
-                    startActivity(getActivityCharacter);
-                    mProgressBar.setVisibility(View.INVISIBLE);
-                    mAppCompatActivity.finish();
-
-                }
-            });
+//            mVideoView.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+//                @Override
+//                public void onCompletion(MediaPlayer mediaPlayer) {
 //
+//
+//                    mProgressBar.setVisibility(View.VISIBLE);
+//                    ParseDataJson parseDataJson = new ParseDataJson();
+//
+//                    SqliteHelper mSqliteHelper = new SqliteHelper(mAppCompatActivity);
+//                    mSqliteHelper.creatDatabase();
+//                    mSqliteHelper.checkDataDatabase();
+////                    mSqliteHelper.createTable();
+//                    mSqliteHelper.insertAllHero(parseDataJson.getData(s));
+//                    mSqliteHelper.closeDatabase();
+//
+//                    Intent getActivityCharacter = new Intent(mContext,CharacterHeroActivity.class);
+//                    startActivity(getActivityCharacter);
+//                    mProgressBar.setVisibility(View.INVISIBLE);
+//                    mAppCompatActivity.finish();
+//
+//                }
+//            });
+//
+            mProgressBar.setVisibility(View.VISIBLE);
+            ParseDataJson parseDataJson = new ParseDataJson();
 
+            SqliteHelper mSqliteHelper = new SqliteHelper(mAppCompatActivity);
+            mSqliteHelper.creatDatabase();
+            mSqliteHelper.checkDataDatabase();
+//                    mSqliteHelper.createTable();
+//            mSqliteHelper.insertAllHero(parseDataJson.getData(s));
+            mSqliteHelper.closeDatabase();
+
+            Intent getActivityCharacter = new Intent(mContext,CharacterHeroActivity.class);
+            startActivity(getActivityCharacter);
+            mProgressBar.setVisibility(View.INVISIBLE);
+            mAppCompatActivity.finish();
 
 //
 //

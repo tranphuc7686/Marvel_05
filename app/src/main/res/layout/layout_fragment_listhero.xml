@@ -4,6 +4,23 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+    <android.support.v7.widget.Toolbar
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:id="@+id/mToolbarHeroActi"
+        android:background="@color/denNhat">
+        <Spinner
+            android:layout_width="120dp"
+            android:layout_height="35dp"
+            android:spinnerMode="dropdown"
+            android:id="@+id/mSpinnerListHero"/>
+
+
+
+
+
+
+    </android.support.v7.widget.Toolbar>
 
 
     <FrameLayout

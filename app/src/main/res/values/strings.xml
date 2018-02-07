@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">Marvel-Android</string>
+    <string-array name="spinner_array">
+        <item>Favorite Hero</item>
+
+
+
+    </string-array>
 </resources>

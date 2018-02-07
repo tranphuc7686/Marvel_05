@@ -9,7 +9,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ProgressBar;
 
 import java.util.ArrayList;
@@ -20,10 +19,10 @@ import java.util.ArrayList;
 
 public class FragmentFavHero extends Fragment {
 
-    private RecyclerviewAdaper mRecycleviewAdaper;
+    public static RecyclerviewAdaper mRecycleviewAdaper;
     private RecyclerView mRecyclerView;
     public static ProgressBar mProgressBar;
-    private Button kichhoat;
+
     private SqliteHelper mSqliteHelper;
 
 
@@ -34,16 +33,10 @@ public class FragmentFavHero extends Fragment {
 
         mRecyclerView = view.findViewById(R.id.mListHeroFav);
         mProgressBar = view.findViewById(R.id.progressLoadDataFav);
-        kichhoat = view.findViewById(R.id.kichhoat);
+
         mSqliteHelper = new SqliteHelper((AppCompatActivity)getActivity());
 
-        kichhoat.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                new ProcessFavHeroData().execute();
-            }
-        });
-
+        new ProcessFavHeroData().execute();
 
 
 
