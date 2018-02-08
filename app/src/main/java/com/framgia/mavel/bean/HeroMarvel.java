@@ -1,11 +1,11 @@
-package com.framgia.mavel;
+package com.framgia.mavel.bean;
 
 /**
  * Created by Admin on 30/01/2018.
  */
 
 public class HeroMarvel {
-    private String id,nameOfHero,imageHero,descriptionOfHero,isFav ;
+    private String id, nameOfHero, imageHero, descriptionOfHero, isFav;
 
     public HeroMarvel() {
 
@@ -35,7 +35,7 @@ public class HeroMarvel {
         this.id = id;
     }
 
-    public HeroMarvel(String id, String nameOfHero, String imageHero, String descriptionOfHero,String isFav ) {
+    public HeroMarvel(String id, String nameOfHero, String imageHero, String descriptionOfHero, String isFav) {
 
         this.id = id;
         this.nameOfHero = nameOfHero;

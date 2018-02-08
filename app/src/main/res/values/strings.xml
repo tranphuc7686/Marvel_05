@@ -1,5 +1,7 @@
 <resources>
     <string name="app_name">Marvel-Android</string>
+    <string name="open">Open</string>
+    <string name="close">Close</string>
     <string-array name="spinner_array">
         <item>Favorite Hero</item>
 

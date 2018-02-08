@@ -1,4 +1,6 @@
-package com.framgia.mavel;
+package com.framgia.mavel.service;
+
+import com.framgia.mavel.bean.HeroMarvel;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -11,7 +13,7 @@ import java.util.ArrayList;
  */
 
 public class ParseDataJson {
-    public ArrayList<HeroMarvel> getData(String duLieu){
+    public ArrayList<HeroMarvel> getData(String duLieu) {
         ArrayList<HeroMarvel> arrData = new ArrayList<HeroMarvel>();
 
         try {
@@ -20,31 +22,26 @@ public class ParseDataJson {
             JSONArray arrDataJson = dataObject.getJSONArray("results");
 
 
-
-
-            for(int i = 0 ; i<arrDataJson.length();i++){
+            for (int i = 0; i < arrDataJson.length(); i++) {
 
 
                 JSONObject mJsonObjectTemp = arrDataJson.getJSONObject(i);
-                JSONArray getTextObjects =mJsonObjectTemp.getJSONArray("textObjects");
-                String descriptionOfHero="";
-                if(getTextObjects.length()!=0){
+                JSONArray getTextObjects = mJsonObjectTemp.getJSONArray("textObjects");
+                String descriptionOfHero = "";
+                if (getTextObjects.length() != 0) {
                     JSONObject getTextObject = getTextObjects.getJSONObject(0);
 
-                    descriptionOfHero =getTextObject.getString("text");
+                    descriptionOfHero = getTextObject.getString("text");
 
                 }
 
 
                 JSONObject pathJsonObject = mJsonObjectTemp.getJSONObject("thumbnail");
 
-                arrData.add( new HeroMarvel(mJsonObjectTemp.getString("id"),mJsonObjectTemp.getString("title"),pathJsonObject.getString("path"),descriptionOfHero));
-
+                arrData.add(new HeroMarvel(mJsonObjectTemp.getString("id"), mJsonObjectTemp.getString("title"), pathJsonObject.getString("path"), descriptionOfHero));
 
 
             }
-
-
 
 
         } catch (JSONException e) {
@@ -55,7 +52,6 @@ public class ParseDataJson {
         return arrData;
 
     }
-
 
 
 }
