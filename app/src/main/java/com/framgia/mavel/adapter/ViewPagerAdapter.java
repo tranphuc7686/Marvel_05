@@ -14,7 +14,7 @@ import com.framgia.mavel.fragment.ListHero;
 
 public class ViewPagerAdapter  extends FragmentStatePagerAdapter {
     private AppCompatActivity mAppCompatActivity;
-    public ViewPagerAdapter(FragmentManager fm,AppCompatActivity mAppCompatActivity) {
+    public ViewPagerAdapter(FragmentManager fm , AppCompatActivity mAppCompatActivity) {
         super(fm);
         this.mAppCompatActivity = mAppCompatActivity;
 
@@ -23,14 +23,14 @@ public class ViewPagerAdapter  extends FragmentStatePagerAdapter {
     @Override
     public Fragment getItem(int position) {
 
-        Fragment frag=null;
+        Fragment frag = null;
         switch (position){
             case 0:
 
                 frag = new ListHero(mAppCompatActivity);
                 break;
             case 1:
-                frag=new FavHero();
+                frag = new FavHero();
                 break;
 
         }
@@ -45,10 +45,10 @@ public class ViewPagerAdapter  extends FragmentStatePagerAdapter {
         String title = "";
         switch (position){
             case 0:
-                title="Hero";
+                title = "Hero";
                 break;
             case 1:
-                title="Favior Hero";
+                title = "Favior Hero";
                 break;
 
         }

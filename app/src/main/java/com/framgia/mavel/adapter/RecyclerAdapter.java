@@ -35,7 +35,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.Recycl
     private FavHero mFavHero;
     public static final String ACTION_REFESHLISTVIEW = "LOADLISTVIEW";
 
-    public ArrayList<String> idHeroFav;
+    private ArrayList<String> idHeroFav;
 
     public RecyclerAdapter(ArrayList<HeroMarvel> data,
                            Context context,
@@ -56,10 +56,14 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.Recycl
 
         for (int i = 0; i <= a.size() - 1; i++) {
             for (int j = 0; j <= this.data.size() - 1; j++)
-                if (this.data.get(j).getId().compareTo(a.get(i)) == 0) {
+            {
+                if (this.data.get(j).getId().compareTo(a.get(i)) == 0)
+                {
 
                     this.data.get(j).setIsFav(1);
                 }
+            }
+
         }
 
     }
@@ -71,11 +75,9 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.Recycl
         intentFilter.addAction(ACTION_REFESHLISTVIEW);
         mAppCompatActivity.registerReceiver(mFavHero.getmBroadcastReceiver(), intentFilter);
     }
-    public void unstallReceiver(){
+    public void unstallReceiver() {
         mAppCompatActivity.unregisterReceiver(mFavHero.getmBroadcastReceiver());
     }
-
-
     @Override
     public RecyclerViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
@@ -100,40 +102,29 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.Recycl
         this.data.addAll(tempData);
         notifyDataSetChanged();
     }
-
-
     @Override
     public void onBindViewHolder(final RecyclerViewHolder holder, final int position) {
-
-
         holder.mNameOfHero.setText(data.get(position).getNameOfHero());
         Picasso.with(context)
                 .load(data.get(position).getImageHero() + "/landscape_medium.jpg")
                 .placeholder(R.mipmap.ic_erro_image)
                 .into(holder.imageHero);
         if (data.get(position).getIsFav() == 1) {
-
             holder.favIcon.setVisibility(View.VISIBLE);
         } else {
             holder.favIcon.setVisibility(View.GONE);
-
-
         }
-
         holder.imageHero.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(view.getContext(), InformationHero.class);
                 intent.putExtra("Hero", (Parcelable) data.get(position));
-
                 view.getContext().startActivity(intent);
             }
         });
-
         holder.imageHero.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View view) {
-
                 if (data.get(position).getIsFav() == 1) {
                     mSqliteHelper.insertDontLikeHero(data.get(position).getId());
                     Toast.makeText(view.getContext(),
@@ -147,8 +138,6 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.Recycl
                     idHeroFav.remove(data.get(position).getId());
                     loadDataFav(idHeroFav);
                     holder.favIcon.setVisibility(View.INVISIBLE);
-
-
                 } else {
                     mSqliteHelper.insertLikeHero(data.get(position).getId());
                     Toast.makeText(view.getContext(),
@@ -161,10 +150,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.Recycl
                     idHeroFav.add(data.get(position).getId());
                     loadDataFav(idHeroFav);
                     holder.favIcon.setVisibility(View.VISIBLE);
-
                 }
-
-
                 return true;
             }
         });
@@ -184,8 +170,6 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.Recycl
             }
         }
     }
-
-
     @Override
     public int getItemCount() {
         return data.size();

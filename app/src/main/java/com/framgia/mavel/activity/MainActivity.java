@@ -53,7 +53,10 @@ public class MainActivity extends AppCompatActivity {
         mediaController.setAnchorView(mVideoView);
 
         mVideoView.setMediaController(mediaController);
-        Uri uriVideo = Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.marveintro);
+        Uri uriVideo = Uri.parse("android.resource://" +
+                getPackageName() +
+                "/" +
+                R.raw.marveintro);
         mVideoView.setVideoURI(uriVideo);
         mVideoView.start();
         mVideoView.requestFocus();
@@ -67,12 +70,15 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        if (checkInternetConnection() == true) {
-
-            ProcessGetDataJson processGetDataJson = new ProcessGetDataJson(mContext, 0);
-            processGetDataJson.execute("http://gateway.marvel.com/v1/public/comics?ts=1&apikey=b97eaf6930abef3f4d3b6560be8d1957&hash=e543b1ad490af1740ad8c83fbaa55eb2");
+        if (checkInternetConnection()) {
+            ProcessGetDataJson processGetDataJson = new ProcessGetDataJson(mContext,
+                    0);
+            processGetDataJson.execute("http://gateway.marvel.com/v1/public/" +
+                    "comics?ts=1&apikey=b97eaf6930abef3f4d3b6560be8d1957" +
+                    "&hash=e543b1ad490af1740ad8c83fbaa55eb2");
         } else {
-            Toast.makeText(mContext, "Kiem tra ket noi internet", Toast.LENGTH_SHORT).show();
+            Toast.makeText(mContext, "Kiem tra ket noi internet", Toast.LENGTH_SHORT)
+                    .show();
             mAppCompatActivity.finish();
         }
 
@@ -91,10 +97,15 @@ public class MainActivity extends AppCompatActivity {
                     public void onClick(DialogInterface dialog, int id) {
                         mVideoView.setVisibility(View.INVISIBLE);
                         mProgressBar.setVisibility(View.VISIBLE);
-                        if (checkInternetConnection() == true) {
+                        if (checkInternetConnection()) {
 
-                            ProcessGetDataJson processGetDataJson = new ProcessGetDataJson(mContext, 1);
-                            processGetDataJson.execute("http://gateway.marvel.com/v1/public/comics?ts=1&apikey=b97eaf6930abef3f4d3b6560be8d1957&hash=e543b1ad490af1740ad8c83fbaa55eb2");
+                            ProcessGetDataJson processGetDataJson = new ProcessGetDataJson(mContext,
+                                    1);
+                            processGetDataJson.execute(
+                                    "http://gateway.marvel.com/v1/" +
+                                            "public/comics?ts=1&apikey=b97eaf6930ab" +
+                                            "ef3f4d3b6560be8d1957&hash=e543b1ad490af" +
+                                            "1740ad8c83fbaa55eb2");
                         } else {
                             Toast.makeText(mContext, "Kiem tra ket noi internet", Toast.LENGTH_SHORT).show();
                             mAppCompatActivity.finish();
@@ -123,11 +134,24 @@ public class MainActivity extends AppCompatActivity {
         NetworkInfo[] netInfo = cm.getAllNetworkInfo();
         for (NetworkInfo ni : netInfo) {
             if (ni.getTypeName().equalsIgnoreCase("WIFI"))
+            {
                 if (ni.isConnected())
+                {
                     haveConnectedWifi = true;
+                }
+
+            }
+
             if (ni.getTypeName().equalsIgnoreCase("MOBILE"))
+            {
                 if (ni.isConnected())
+                {
                     haveConnectedMobile = true;
+                }
+
+
+            }
+
         }
         return haveConnectedWifi || haveConnectedMobile;
 
@@ -140,8 +164,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     class ProcessGetDataJson extends AsyncTask<String, Void, String> {
-        private Context mContext;
-        private int checkErro;
+        public Context mContext;
+        public int checkErro;
 
 
         public ProcessGetDataJson(Context mContext, int codeCheckErro) {

@@ -34,7 +34,7 @@ public class CharacterHeroActivity extends AppCompatActivity {
     private Context mContext;
     private DrawerLayout mDrawerLayout;
     private ActionBarDrawerToggle mActionBarDrawerToggle;
-    public static ViewPager mViewPager;
+    private static ViewPager mViewPager;
     private ListHero mListHero;
     private FavHero mFavHero;
     public static final String ACTION_FILTERDATA = "FilterHero";
@@ -78,7 +78,9 @@ public class CharacterHeroActivity extends AppCompatActivity {
         mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
 
             @Override
-            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+            public void onPageScrolled(int position,
+                                       float positionOffset,
+                                       int positionOffsetPixels) {
 
             }
 
@@ -115,14 +117,13 @@ public class CharacterHeroActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         this.menu = menu;
-
-
         getMenuInflater().inflate(R.menu.menu_listhero, menu);
         MenuItem item = menu.findItem(R.id.btnSeach);
         SearchView searchView = (SearchView) MenuItemCompat.getActionView(item);
 
 
-        EditText editText = ((EditText) searchView.findViewById(android.support.v7.appcompat.R.id.search_src_text));
+        EditText editText = ((EditText) searchView.findViewById(
+                android.support.v7.appcompat.R.id.search_src_text));
         editText.setHintTextColor(getResources().getColor(R.color.white));
         editText.setTextColor(getResources().getColor(R.color.white));
 
@@ -179,23 +180,25 @@ public class CharacterHeroActivity extends AppCompatActivity {
         if (mActionBarDrawerToggle.onOptionsItemSelected(item)) {
             return true;
         }
-        if (item.getItemId() == R.id.btnExit) {
-            finish();
-
-
-        }
-        if (item.getItemId() == R.id.btnFavActivity) {
-            if (checkIconFav == false) {
-                item.setIcon(R.drawable.hearts);
-                mViewPager.setCurrentItem(2, true);
-                checkIconFav = true;
-            } else {
-                item.setIcon(R.drawable.ic_favorite_black_24dp);
-                mViewPager.setCurrentItem(0, true);
-                checkIconFav = false;
+        switch (item.getItemId()){
+            case R.id.btnExit:{
+                finish();
+                break;
             }
-
+            case R.id.btnFavActivity : {
+                if (checkIconFav == false) {
+                    item.setIcon(R.drawable.hearts);
+                    mViewPager.setCurrentItem(2, true);
+                    checkIconFav = true;
+                } else {
+                    item.setIcon(R.drawable.ic_favorite_black_24dp);
+                    mViewPager.setCurrentItem(0, true);
+                    checkIconFav = false;
+                }
+            }
         }
+
+
 
 
         return super.onOptionsItemSelected(item);

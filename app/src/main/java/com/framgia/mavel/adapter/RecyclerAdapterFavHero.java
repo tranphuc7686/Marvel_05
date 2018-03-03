@@ -27,7 +27,8 @@ import java.util.ArrayList;
  * Created by Admin on 03/03/2018.
  */
 
-public class RecyclerAdapterFavHero extends RecyclerView.Adapter<RecyclerAdapterFavHero.RecyclerViewHolder> {
+public class RecyclerAdapterFavHero extends RecyclerView.Adapter<
+        RecyclerAdapterFavHero.RecyclerViewHolder> {
 
     private ArrayList<HeroMarvel> data = new ArrayList<>();
     private Context context;
@@ -38,7 +39,7 @@ public class RecyclerAdapterFavHero extends RecyclerView.Adapter<RecyclerAdapter
     public static final String ACTION_REFESHLISTVIEW = "LOADLISTVIEW";
     public final static String ACTION_REFESHICONLISTVIEW = "refesflisftview";
 
-    public ArrayList<String> idHeroFav;
+    private ArrayList<String> idHeroFav;
 
     public RecyclerAdapterFavHero(ArrayList<HeroMarvel> data,
                                   Context context,
@@ -53,19 +54,26 @@ public class RecyclerAdapterFavHero extends RecyclerView.Adapter<RecyclerAdapter
         createBroadcastReceiver();
 
     }
-    public void unstallReceiver(){
-        mAppCompatActivity.unregisterReceiver(mListHero.getmBroadcastReceiver());
-        mAppCompatActivity.unregisterReceiver(mFavHero.getmBroadcastReceiver());
+    public void unstallReceiver() {
+        mAppCompatActivity.unregisterReceiver(
+                mListHero.getmBroadcastReceiver());
+        mAppCompatActivity.unregisterReceiver(
+                mFavHero.getmBroadcastReceiver());
     }
 
     private void loadDataFav(ArrayList<String> a) {
 
         for (int i = 0; i <= a.size() - 1; i++) {
             for (int j = 0; j <= this.data.size() - 1; j++)
+            {
                 if (this.data.get(j).getId().compareTo(a.get(i)) == 0) {
+                    {
+                        this.data.get(j).setIsFav(1);
+                    }
 
-                    this.data.get(j).setIsFav(1);
                 }
+            }
+
         }
 
     }
@@ -85,16 +93,20 @@ public class RecyclerAdapterFavHero extends RecyclerView.Adapter<RecyclerAdapter
     }
 
     @Override
-    public RecyclerAdapterFavHero.RecyclerViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public RecyclerAdapterFavHero.RecyclerViewHolder
+    onCreateViewHolder(
+            ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
-        View view = inflater.inflate(R.layout.layout_item_listhero, parent, false);
+        View view = inflater.inflate(R.layout.layout_item_listhero, parent,
+                false);
 
 
         return new RecyclerAdapterFavHero.RecyclerViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(final RecyclerViewHolder holder, final int position) {
+    public void onBindViewHolder(final RecyclerViewHolder holder,
+                                 final int position) {
         holder.mNameOfHero.setText(data.get(position).getNameOfHero());
         Picasso.with(context)
                 .load(data.get(position).getImageHero() + "/landscape_medium.jpg")
