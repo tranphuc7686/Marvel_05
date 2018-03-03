@@ -18,21 +18,13 @@ public class ParseDataJson {
             JSONObject mJsonObject = new JSONObject(duLieu);
             JSONObject dataObject = mJsonObject.getJSONObject("data");
             JSONArray arrDataJson = dataObject.getJSONArray("results");
-
-
-
-
             for(int i = 0 ; i<arrDataJson.length();i++){
-
-
                 JSONObject mJsonObjectTemp = arrDataJson.getJSONObject(i);
                 JSONArray getTextObjects =mJsonObjectTemp.getJSONArray("textObjects");
                 String descriptionOfHero="";
                 if(getTextObjects.length()!=0){
                     JSONObject getTextObject = getTextObjects.getJSONObject(0);
-
                     descriptionOfHero =getTextObject.getString("text");
-
                 }
 
 

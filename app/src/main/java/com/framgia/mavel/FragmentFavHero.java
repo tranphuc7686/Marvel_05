@@ -58,7 +58,7 @@ public class FragmentFavHero extends Fragment {
         protected ArrayList<HeroMarvel> doInBackground(Void... voids) {
 
             mSqliteHelper.creatDatabase();
-            return  mSqliteHelper.getFavHero();
+            return mSqliteHelper.getFavHero();
         }
 
         @Override
