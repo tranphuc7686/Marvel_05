@@ -89,9 +89,7 @@ public class RecyclerAdapterFavHero extends RecyclerView.Adapter<
         IntentFilter intentFilter2 = new IntentFilter();
         intentFilter2.addAction(ACTION_REFESHICONLISTVIEW);
         mAppCompatActivity.registerReceiver(mListHero.getmBroadcastReceiver(), intentFilter2);
-
     }
-
     @Override
     public RecyclerAdapterFavHero.RecyclerViewHolder
     onCreateViewHolder(
@@ -99,11 +97,8 @@ public class RecyclerAdapterFavHero extends RecyclerView.Adapter<
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
         View view = inflater.inflate(R.layout.layout_item_listhero, parent,
                 false);
-
-
         return new RecyclerAdapterFavHero.RecyclerViewHolder(view);
     }
-
     @Override
     public void onBindViewHolder(final RecyclerViewHolder holder,
                                   int position) {

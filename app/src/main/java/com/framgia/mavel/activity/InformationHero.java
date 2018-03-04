@@ -55,10 +55,8 @@ public class InformationHero extends AppCompatActivity {
 
     private void setInfomation(HeroMarvel a) {
 
-        if (a.getDescriptionOfHero().equals("")) {
+        if (a.getDescriptionOfHero().equals("") ==false) {
 
-            this.mTextView.setText("  Dont have tescription for this Hero ");
-        } else {
             this.mTextView.setText("  " + a.getDescriptionOfHero());
         }
         Picasso.with(mContext)

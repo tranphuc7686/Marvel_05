@@ -60,8 +60,8 @@ public class SqliteHelper {
 
         boolean isPermissionOn = true;
         final int version = Build.VERSION.SDK_INT;
-        if (version >= 23 && !canAccessExternalSd())
-        {
+        if (version >= 23 && !canAccessExternalSd()){
+
             isPermissionOn = false;
             mAppCompatActivity.requestPermissions(EXTERNAL_PERMISSION, EXTERNAL_REQUEST);
         }
