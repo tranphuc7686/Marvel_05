@@ -50,7 +50,9 @@ public class ListHero extends Fragment {
 
     @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater
+            , @Nullable ViewGroup container
+            , @Nullable Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
         View view = inflater.inflate(R.layout.fragment_list_hero, container, false);
 
@@ -96,10 +98,10 @@ public class ListHero extends Fragment {
         mRecycleviewAdaper.unstallReceiver();
     }
 
-    private ArrayList<HeroMarvel> filterMethod(ArrayList<HeroMarvel> data, String query) {
+    private ArrayList<HeroMarvel> filterMethod(ArrayList<HeroMarvel> dataTemp, String query) {
         ArrayList<HeroMarvel> resulf = new ArrayList<HeroMarvel>();
 
-        for (HeroMarvel temp : data) {
+        for (HeroMarvel temp : dataTemp) {
             String text = temp.getNameOfHero().toLowerCase();
             if (text.startsWith(query)) {
 
@@ -129,7 +131,9 @@ public class ListHero extends Fragment {
             // create recycleview
             data = heroMarvels;
             mSqliteHelper.closeDatabase();
-            mRecycleviewAdaper = new RecyclerAdapter(heroMarvels, mContext, mAppCompatActivity); mRecyclerView.setLayoutManager(new GridLayoutManager(mContext, 2));
+            mRecycleviewAdaper = new RecyclerAdapter(heroMarvels, mContext
+                    , mAppCompatActivity);
+            mRecyclerView.setLayoutManager(new GridLayoutManager(mContext, 2));
             mRecyclerView.setAdapter(mRecycleviewAdaper);
             mProgressBar.setVisibility(View.INVISIBLE);
 

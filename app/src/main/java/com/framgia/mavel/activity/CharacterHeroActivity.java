@@ -59,10 +59,10 @@ public class CharacterHeroActivity extends AppCompatActivity {
         mSqliteHelper = new SqliteHelper(this);
         mSqliteHelper.creatDatabase();
         //create toolbar
-        Toolbar topToolBar = (Toolbar) findViewById(R.id.mToolbarHeroActi);
-        setSupportActionBar(topToolBar);
+
+        setSupportActionBar(mToolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        topToolBar.setNavigationIcon(R.drawable.ic_menu_black_24dp);
+        mToolbar.setNavigationIcon(R.drawable.ic_menu_black_24dp);
         //create navigation view
         createDrawerLayout();
         // create Viewpaper
@@ -165,8 +165,10 @@ public class CharacterHeroActivity extends AppCompatActivity {
                 finish();
                 break;
             }
-            case R.id.btnFavActivity: {
-                if (checkIconFav == false) {
+            case R.id.btnFavActivity:
+            {
+                if (checkIconFav == false)
+                {
                     item.setIcon(R.drawable.hearts);
                     mViewPager.setCurrentItem(2, true);
                     checkIconFav = true;
@@ -175,6 +177,7 @@ public class CharacterHeroActivity extends AppCompatActivity {
                     mViewPager.setCurrentItem(0, true);
                     checkIconFav = false;
                 }
+                break;
             }
         }
         return super.onOptionsItemSelected(item);

@@ -135,19 +135,12 @@ public class MainActivity extends AppCompatActivity {
                 getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo[] netInfo = cm.getAllNetworkInfo();
         for (NetworkInfo ni : netInfo) {
-            if (ni.getTypeName().equalsIgnoreCase("WIFI")) {
-                if (ni.isConnected()) {
-                    haveConnectedWifi = true;
-                }
-
+            if (ni.getTypeName().equalsIgnoreCase("WIFI") &&ni.isConnected()) {
+                haveConnectedWifi = true;
             }
 
-            if (ni.getTypeName().equalsIgnoreCase("MOBILE")) {
-                if (ni.isConnected()) {
+            if (ni.getTypeName().equalsIgnoreCase("MOBILE") && ni.isConnected()) {
                     haveConnectedMobile = true;
-                }
-
-
             }
 
         }

@@ -49,7 +49,6 @@ public class SqliteHelper {
     public void creatDatabase() {
         Context ctx = this.mAppCompatActivity.getBaseContext();
         String pathDataBase = ctx.getFilesDir().getPath() + "/HeroMarvel.db";
-        System.out.println(pathDataBase);
         this.mSqLiteDatabase = SQLiteDatabase.openOrCreateDatabase(pathDataBase, null);
         this.mSqLiteDatabase = SQLiteDatabase.openDatabase(pathDataBase,
                 null,
@@ -61,12 +60,10 @@ public class SqliteHelper {
 
         boolean isPermissionOn = true;
         final int version = Build.VERSION.SDK_INT;
-        System.out.println(version + " version");
-        if (version >= 23) {
-            if (!canAccessExternalSd()) {
-                isPermissionOn = false;
-                mAppCompatActivity.requestPermissions(EXTERNAL_PERMISSION, EXTERNAL_REQUEST);
-            }
+        if (version >= 23 && !canAccessExternalSd())
+        {
+            isPermissionOn = false;
+            mAppCompatActivity.requestPermissions(EXTERNAL_PERMISSION, EXTERNAL_REQUEST);
         }
 
         return isPermissionOn;
@@ -105,7 +102,6 @@ public class SqliteHelper {
     public void insertRecord(String valueIDHero) {
         contentValues = new ContentValues();
         contentValues.put(IDHERO_COLUMN, valueIDHero);
-        System.out.println(mSqLiteDatabase);
         if (mSqLiteDatabase.insert(TABLE_NAME_HERO, null, contentValues) == -1) {
             Toast.makeText(mAppCompatActivity.getBaseContext(),
                     "Lỗi insert",
@@ -258,7 +254,6 @@ public class SqliteHelper {
                     c.getString(1),
                     c.getString(2),
                     c.getString(3)));
-            System.out.println("0 " + c.getString(0) + " 1 " + c.getString(1) + " 2 " + c.getString(2) + " 3 " + c.getString(3) + " fjdiojfoisdjfosdof");
             c.moveToNext();
         }
         c.close();
@@ -284,13 +279,10 @@ public class SqliteHelper {
         c.moveToFirst();
 
         while (!c.isAfterLast()) {
-            System.out.println(c.getString(0)
-                    + " " + c.getString(1)
-                    + " " + c.getString(2)
-                    + " " + c.getString(3) + " " + "  Main chay");
+
             c.moveToNext();
         }
-        System.out.println("-------------");
+
         c.close();
     }
 

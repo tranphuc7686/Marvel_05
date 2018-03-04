@@ -76,10 +76,10 @@ public class FavHero extends Fragment {
         }
     };
 
-    private ArrayList<HeroMarvel> filterMethod(ArrayList<HeroMarvel> data, String query) {
+    private ArrayList<HeroMarvel> filterMethod(ArrayList<HeroMarvel> dataTemp, String query) {
         ArrayList<HeroMarvel> resulf = new ArrayList<HeroMarvel>();
 
-        for (HeroMarvel temp : data) {
+        for (HeroMarvel temp : dataTemp) {
             String text = temp.getNameOfHero().toLowerCase();
             if (text.startsWith(query)) {
 

@@ -25,10 +25,10 @@ public class HeroMarvel implements Parcelable {
         this.descriptionOfHero = descriptionOfHero;
     }
 
-    public HeroMarvel(String id, String nameOfHero,
-                      String imageHero
-            , String descriptionOfHero,
-                      int isFav) {
+    public HeroMarvel(String id, String nameOfHero
+                      ,String imageHero
+            , String descriptionOfHero
+                      ,int isFav) {
         this.id = id;
         this.nameOfHero = nameOfHero;
         this.imageHero = imageHero;

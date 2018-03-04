@@ -104,7 +104,8 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.Recycl
     }
 
     @Override
-    public void onBindViewHolder(final RecyclerViewHolder holder, final int position) {
+    public void onBindViewHolder(final RecyclerViewHolder holder,  int position) {
+        final int position2 = position;
         holder.mNameOfHero.setText(data.get(position).getNameOfHero());
         Picasso.with(context)
                 .load(data.get(position).getImageHero() + "/landscape_medium.jpg")
@@ -119,36 +120,36 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.Recycl
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(view.getContext(), InformationHero.class);
-                intent.putExtra("Hero", (Parcelable) data.get(position));
+                intent.putExtra("Hero", (Parcelable) data.get(position2));
                 view.getContext().startActivity(intent);
             }
         });
         holder.imageHero.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View view) {
-                if (data.get(position).getIsFav() == 1) {
-                    mSqliteHelper.insertDontLikeHero(data.get(position).getId());
+                if (data.get(position2).getIsFav() == 1) {
+                    mSqliteHelper.insertDontLikeHero(data.get(position2).getId());
                     Toast.makeText(view.getContext(),
-                            "Đã bỏ thích : " + data.get(position).getNameOfHero(),
+                            "Đã bỏ thích : " + data.get(position2).getNameOfHero(),
                             Toast.LENGTH_SHORT).show();
                     //load lai listView FavHero
                     Intent intent = new Intent();
                     intent.setAction(RecyclerAdapter.ACTION_REFESHLISTVIEW);
                     mAppCompatActivity.sendBroadcast(intent);
-                    data.get(position).setIsFav(0);
-                    idHeroFav.remove(data.get(position).getId());
+                    data.get(position2).setIsFav(0);
+                    idHeroFav.remove(data.get(position2).getId());
                     loadDataFav(idHeroFav);
                     holder.favIcon.setVisibility(View.INVISIBLE);
                 } else {
-                    mSqliteHelper.insertLikeHero(data.get(position).getId());
+                    mSqliteHelper.insertLikeHero(data.get(position2).getId());
                     Toast.makeText(view.getContext(),
-                            "Đã thích : " + data.get(position).getNameOfHero(),
+                            "Đã thích : " + data.get(position2).getNameOfHero(),
                             Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent();
                     intent.setAction(RecyclerAdapter.ACTION_REFESHLISTVIEW);
                     mAppCompatActivity.sendBroadcast(intent);
-                    data.get(position).setIsFav(1);
-                    idHeroFav.add(data.get(position).getId());
+                    data.get(position2).setIsFav(1);
+                    idHeroFav.add(data.get(position2).getId());
                     loadDataFav(idHeroFav);
                     holder.favIcon.setVisibility(View.VISIBLE);
                 }

@@ -106,7 +106,8 @@ public class RecyclerAdapterFavHero extends RecyclerView.Adapter<
 
     @Override
     public void onBindViewHolder(final RecyclerViewHolder holder,
-                                 final int position) {
+                                  int position) {
+        final int position2 = position;
         holder.mNameOfHero.setText(data.get(position).getNameOfHero());
         Picasso.with(context)
                 .load(data.get(position).getImageHero() + "/landscape_medium.jpg")
@@ -125,7 +126,7 @@ public class RecyclerAdapterFavHero extends RecyclerView.Adapter<
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(view.getContext(), InformationHero.class);
-                intent.putExtra("Hero", (Parcelable) data.get(position));
+                intent.putExtra("Hero", (Parcelable) data.get(position2));
                 view.getContext().startActivity(intent);
             }
         });
@@ -134,10 +135,10 @@ public class RecyclerAdapterFavHero extends RecyclerView.Adapter<
             @Override
             public boolean onLongClick(View view) {
 
-                if (data.get(position).getIsFav() == 1) {
-                    mSqliteHelper.insertDontLikeHero(data.get(position).getId());
+                if (data.get(position2).getIsFav() == 1) {
+                    mSqliteHelper.insertDontLikeHero(data.get(position2).getId());
                     Toast.makeText(view.getContext(),
-                            "Đã bỏ thích : " + data.get(position).getNameOfHero(),
+                            "Đã bỏ thích : " + data.get(position2).getNameOfHero(),
                             Toast.LENGTH_SHORT).show();
                     //load lai listView FavHero
                     Intent intent = new Intent();
@@ -145,14 +146,14 @@ public class RecyclerAdapterFavHero extends RecyclerView.Adapter<
                     mAppCompatActivity.sendBroadcast(intent);
                     //load lai listViewHero
                     Intent intent2 = new Intent();
-                    intent2.putExtra("HeroChange", data.get(position));
+                    intent2.putExtra("HeroChange", data.get(position2));
                     intent2.setAction(ACTION_REFESHICONLISTVIEW);
 
                     mAppCompatActivity.sendBroadcast(intent2);
 
 
-                    data.get(position).setIsFav(0);
-                    idHeroFav.remove(data.get(position).getId());
+                    data.get(position2).setIsFav(0);
+                    idHeroFav.remove(data.get(position2).getId());
                     loadDataFav(idHeroFav);
                     holder.favIcon.setVisibility(View.INVISIBLE);
 
@@ -160,7 +161,7 @@ public class RecyclerAdapterFavHero extends RecyclerView.Adapter<
                 }
 
 
-                return true;
+                return false;
             }
         });
 
