@@ -53,10 +53,10 @@ public class MainActivity extends AppCompatActivity {
         mediaController.setAnchorView(mVideoView);
 
         mVideoView.setMediaController(mediaController);
-        Uri uriVideo = Uri.parse("android.resource://" +
-                getPackageName() +
-                "/" +
-                R.raw.marveintro);
+        Uri uriVideo = Uri.parse("android.resource://"
+                + getPackageName()
+                + "/"
+                + R.raw.marveintro);
         mVideoView.setVideoURI(uriVideo);
         mVideoView.start();
         mVideoView.requestFocus();
@@ -73,9 +73,9 @@ public class MainActivity extends AppCompatActivity {
         if (checkInternetConnection()) {
             ProcessGetDataJson processGetDataJson = new ProcessGetDataJson(mContext,
                     0);
-            processGetDataJson.execute("http://gateway.marvel.com/v1/public/" +
-                    "comics?ts=1&apikey=b97eaf6930abef3f4d3b6560be8d1957" +
-                    "&hash=e543b1ad490af1740ad8c83fbaa55eb2");
+            processGetDataJson.execute("http://gateway.marvel.com/v1/public/"
+                    + "comics?ts=1&apikey=b97eaf6930abef3f4d3b6560be8d1957"
+                    + "&hash=e543b1ad490af1740ad8c83fbaa55eb2");
         } else {
             Toast.makeText(mContext, "Kiem tra ket noi internet", Toast.LENGTH_SHORT)
                     .show();
@@ -102,12 +102,13 @@ public class MainActivity extends AppCompatActivity {
                             ProcessGetDataJson processGetDataJson = new ProcessGetDataJson(mContext,
                                     1);
                             processGetDataJson.execute(
-                                    "http://gateway.marvel.com/v1/" +
-                                            "public/comics?ts=1&apikey=b97eaf6930ab" +
-                                            "ef3f4d3b6560be8d1957&hash=e543b1ad490af" +
-                                            "1740ad8c83fbaa55eb2");
+                                    "http://gateway.marvel.com/v1/"
+                                            + "public/comics?ts=1&apikey=b97eaf6930ab"
+                                            + "ef3f4d3b6560be8d1957&hash=e543b1ad490af"
+                                            + "1740ad8c83fbaa55eb2");
                         } else {
-                            Toast.makeText(mContext, "Kiem tra ket noi internet", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(mContext, "Kiem tra ket noi internet",
+                                    Toast.LENGTH_SHORT).show();
                             mAppCompatActivity.finish();
                         }
                     }
@@ -130,22 +131,19 @@ public class MainActivity extends AppCompatActivity {
         boolean haveConnectedWifi = false;
         boolean haveConnectedMobile = false;
 
-        ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        ConnectivityManager cm = (ConnectivityManager)
+                getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo[] netInfo = cm.getAllNetworkInfo();
         for (NetworkInfo ni : netInfo) {
-            if (ni.getTypeName().equalsIgnoreCase("WIFI"))
-            {
-                if (ni.isConnected())
-                {
+            if (ni.getTypeName().equalsIgnoreCase("WIFI")) {
+                if (ni.isConnected()) {
                     haveConnectedWifi = true;
                 }
 
             }
 
-            if (ni.getTypeName().equalsIgnoreCase("MOBILE"))
-            {
-                if (ni.isConnected())
-                {
+            if (ni.getTypeName().equalsIgnoreCase("MOBILE")) {
+                if (ni.isConnected()) {
                     haveConnectedMobile = true;
                 }
 
@@ -164,8 +162,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     class ProcessGetDataJson extends AsyncTask<String, Void, String> {
-        public Context mContext;
-        public int checkErro;
+        private Context mContext;
+        private int checkErro;
 
 
         public ProcessGetDataJson(Context mContext, int codeCheckErro) {
@@ -223,7 +221,8 @@ public class MainActivity extends AppCompatActivity {
                         mSqliteHelper.insertAllHero(parseDataJson.getData(s));
                         mSqliteHelper.closeDatabase();
 
-                        Intent getActivityCharacter = new Intent(mContext, CharacterHeroActivity.class);
+                        Intent getActivityCharacter = new Intent(mContext,
+                                CharacterHeroActivity.class);
                         startActivity(getActivityCharacter);
                         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR_PORTRAIT);
                         mAppCompatActivity.finish();

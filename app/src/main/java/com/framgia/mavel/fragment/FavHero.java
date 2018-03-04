@@ -41,7 +41,8 @@ public class FavHero extends Fragment {
 
     @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater,
+                             @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
         View view = inflater.inflate(R.layout.fragment_fav_hero, container, false);
 
@@ -87,6 +88,7 @@ public class FavHero extends Fragment {
         }
         return resulf;
     }
+
     @Override
     public void onDestroy() {
         super.onDestroy();
@@ -114,7 +116,8 @@ public class FavHero extends Fragment {
             // create recycleview
             data = heroMarvels;
             mSqliteHelper.closeDatabase();
-            mRecycleviewAdaper = new RecyclerAdapterFavHero(heroMarvels, mContext, mAppCompatActivity);
+            mRecycleviewAdaper = new RecyclerAdapterFavHero(heroMarvels,
+                    mContext, mAppCompatActivity);
             mRecyclerView.setLayoutManager(new GridLayoutManager(mContext, 2));
             mRecyclerView.setAdapter(mRecycleviewAdaper);
             mProgressBar.setVisibility(View.INVISIBLE);

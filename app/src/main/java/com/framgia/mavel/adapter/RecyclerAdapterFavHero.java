@@ -54,6 +54,7 @@ public class RecyclerAdapterFavHero extends RecyclerView.Adapter<
         createBroadcastReceiver();
 
     }
+
     public void unstallReceiver() {
         mAppCompatActivity.unregisterReceiver(
                 mListHero.getmBroadcastReceiver());
@@ -64,8 +65,7 @@ public class RecyclerAdapterFavHero extends RecyclerView.Adapter<
     private void loadDataFav(ArrayList<String> a) {
 
         for (int i = 0; i <= a.size() - 1; i++) {
-            for (int j = 0; j <= this.data.size() - 1; j++)
-            {
+            for (int j = 0; j <= this.data.size() - 1; j++) {
                 if (this.data.get(j).getId().compareTo(a.get(i)) == 0) {
                     {
                         this.data.get(j).setIsFav(1);

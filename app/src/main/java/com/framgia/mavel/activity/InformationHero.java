@@ -53,7 +53,6 @@ public class InformationHero extends AppCompatActivity {
     }
 
 
-
     private void setInfomation(HeroMarvel a) {
 
         if (a.getDescriptionOfHero().equals("")) {

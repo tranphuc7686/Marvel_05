@@ -55,18 +55,11 @@ public class CharacterHeroActivity extends AppCompatActivity {
         mAppCompatActivity = this;
         mContext = this;
         mDrawerLayout = findViewById(R.id.mDrawerLayout);
-
-
         //create database sqlite
         mSqliteHelper = new SqliteHelper(this);
         mSqliteHelper.creatDatabase();
-
-        // create recyclerview
-
-
         //create toolbar
         Toolbar topToolBar = (Toolbar) findViewById(R.id.mToolbarHeroActi);
-
         setSupportActionBar(topToolBar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         topToolBar.setNavigationIcon(R.drawable.ic_menu_black_24dp);
@@ -76,25 +69,21 @@ public class CharacterHeroActivity extends AppCompatActivity {
         createViewPaper(mViewPager);
         //code change fragment
         mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-
             @Override
             public void onPageScrolled(int position,
                                        float positionOffset,
                                        int positionOffsetPixels) {
-
             }
 
             @Override
             public void onPageSelected(int position) {
                 MenuItem item = menu.findItem(R.id.btnFavActivity);
-
                 if (position == 1) {
                     item.setIcon(R.drawable.hearts);
                 }
                 if (position == 0) {
                     item.setIcon(R.drawable.ic_favorite_black_24dp);
                 }
-
             }
 
             @Override
@@ -102,17 +91,12 @@ public class CharacterHeroActivity extends AppCompatActivity {
 
             }
         });
-
-
     }
 
     @Override
     public void onAttachFragment(Fragment fragment) {
         super.onAttachFragment(fragment);
-
     }
-
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -120,14 +104,10 @@ public class CharacterHeroActivity extends AppCompatActivity {
         getMenuInflater().inflate(R.menu.menu_listhero, menu);
         MenuItem item = menu.findItem(R.id.btnSeach);
         SearchView searchView = (SearchView) MenuItemCompat.getActionView(item);
-
-
         EditText editText = ((EditText) searchView.findViewById(
                 android.support.v7.appcompat.R.id.search_src_text));
         editText.setHintTextColor(getResources().getColor(R.color.white));
         editText.setTextColor(getResources().getColor(R.color.white));
-
-
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
@@ -180,12 +160,12 @@ public class CharacterHeroActivity extends AppCompatActivity {
         if (mActionBarDrawerToggle.onOptionsItemSelected(item)) {
             return true;
         }
-        switch (item.getItemId()){
-            case R.id.btnExit:{
+        switch (item.getItemId()) {
+            case R.id.btnExit: {
                 finish();
                 break;
             }
-            case R.id.btnFavActivity : {
+            case R.id.btnFavActivity: {
                 if (checkIconFav == false) {
                     item.setIcon(R.drawable.hearts);
                     mViewPager.setCurrentItem(2, true);
@@ -197,10 +177,6 @@ public class CharacterHeroActivity extends AppCompatActivity {
                 }
             }
         }
-
-
-
-
         return super.onOptionsItemSelected(item);
     }
 

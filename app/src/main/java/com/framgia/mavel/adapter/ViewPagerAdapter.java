@@ -12,9 +12,10 @@ import com.framgia.mavel.fragment.ListHero;
  * Created by Admin on 23/02/2018.
  */
 
-public class ViewPagerAdapter  extends FragmentStatePagerAdapter {
+public class ViewPagerAdapter extends FragmentStatePagerAdapter {
     private AppCompatActivity mAppCompatActivity;
-    public ViewPagerAdapter(FragmentManager fm , AppCompatActivity mAppCompatActivity) {
+
+    public ViewPagerAdapter(FragmentManager fm, AppCompatActivity mAppCompatActivity) {
         super(fm);
         this.mAppCompatActivity = mAppCompatActivity;
 
@@ -24,7 +25,7 @@ public class ViewPagerAdapter  extends FragmentStatePagerAdapter {
     public Fragment getItem(int position) {
 
         Fragment frag = null;
-        switch (position){
+        switch (position) {
             case 0:
 
                 frag = new ListHero(mAppCompatActivity);
@@ -36,14 +37,16 @@ public class ViewPagerAdapter  extends FragmentStatePagerAdapter {
         }
         return frag;
     }
+
     @Override
     public int getCount() {
         return 2;
     }
+
     @Override
     public CharSequence getPageTitle(int position) {
         String title = "";
-        switch (position){
+        switch (position) {
             case 0:
                 title = "Hero";
                 break;
@@ -55,6 +58,7 @@ public class ViewPagerAdapter  extends FragmentStatePagerAdapter {
 
         return title;
     }
+
     @Override
     public int getItemPosition(Object object) {
 // POSITION_NONE makes it possible to reload the PagerAdapter

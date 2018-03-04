@@ -37,7 +37,7 @@ public class SqliteHelper {
     public static final String TABLE_NAME_FAVORITE = "FAVORITEHERO";
     public static final String ISFAV_COLUMN = "ISFAV";
     public static final String[] EXTERNAL_PERMISSION = {Manifest.permission.WRITE_EXTERNAL_STORAGE,
-             Manifest.permission.READ_EXTERNAL_STORAGE};
+            Manifest.permission.READ_EXTERNAL_STORAGE};
 
 
     public static final int EXTERNAL_REQUEST = 138;
@@ -53,7 +53,7 @@ public class SqliteHelper {
         this.mSqLiteDatabase = SQLiteDatabase.openOrCreateDatabase(pathDataBase, null);
         this.mSqLiteDatabase = SQLiteDatabase.openDatabase(pathDataBase,
                 null,
-                 SQLiteDatabase.CREATE_IF_NECESSARY);
+                SQLiteDatabase.CREATE_IF_NECESSARY);
     }
 
 
@@ -107,10 +107,10 @@ public class SqliteHelper {
         contentValues.put(IDHERO_COLUMN, valueIDHero);
         System.out.println(mSqLiteDatabase);
         if (mSqLiteDatabase.insert(TABLE_NAME_HERO, null, contentValues) == -1) {
-            Toast.makeText(mAppCompatActivity.getBaseContext() ,
+            Toast.makeText(mAppCompatActivity.getBaseContext(),
                     "Lỗi insert",
 
-                     Toast.LENGTH_SHORT).show();
+                    Toast.LENGTH_SHORT).show();
         } else {
 
             Toast.makeText(mAppCompatActivity.getBaseContext(),
@@ -141,30 +141,30 @@ public class SqliteHelper {
             contentValues.put(IMAGEHERO_COLUMN, a.getImageHero());
             contentValues.put(MOTAHERO_COLUMN, a.getDescriptionOfHero());
             int id = (int) mSqLiteDatabase.insertWithOnConflict(TABLE_NAME_HERO,
-                     null,
-                     contentValues,
+                    null,
+                    contentValues,
                     SQLiteDatabase.CONFLICT_IGNORE);
             if (id == -1) {
                 mSqLiteDatabase.update(TABLE_NAME_HERO,
-                         contentValues,
+                        contentValues,
                         IDHERO_COLUMN + "=?",
-                         new String[]{a.getId()});
+                        new String[]{a.getId()});
             }
         }
     }
 
     public void deleteRecord(String valueIDHero) {
         if (mSqLiteDatabase.delete(TABLE_NAME_HERO,
-                 IDHERO_COLUMN + "=?",
-                 new String[]{valueIDHero}) != 1) {
+                IDHERO_COLUMN + "=?",
+                new String[]{valueIDHero}) != 1) {
             Toast.makeText(mAppCompatActivity.getBaseContext(),
-                     "Lỗi insert",
+                    "Lỗi insert",
                     Toast.LENGTH_SHORT).show();
         } else {
 
             Toast.makeText(mAppCompatActivity.getBaseContext(),
-                     "Thành Công insert",
-                     Toast.LENGTH_SHORT).show();
+                    "Thành Công insert",
+                    Toast.LENGTH_SHORT).show();
         }
 
 
@@ -175,18 +175,18 @@ public class SqliteHelper {
         ArrayList<HeroMarvel> arrHeroMarvel = new ArrayList<HeroMarvel>();
         for (String temp : idHero) {
             Cursor c = mSqLiteDatabase.query(TABLE_NAME_HERO,
-                     null,
-                     IDHERO_COLUMN + "=?",
+                    null,
+                    IDHERO_COLUMN + "=?",
                     new String[]{temp},
-                     null,
-                     null,
-                     null);
+                    null,
+                    null,
+                    null);
             c.moveToFirst();
             while (!c.isAfterLast()) {
                 arrHeroMarvel.add(new HeroMarvel(c.getString(0),
-                         c.getString(1),
-                         c.getString(2),
-                         c.getString(3)));
+                        c.getString(1),
+                        c.getString(2),
+                        c.getString(3)));
                 c.moveToNext();
             }
             c.close();
@@ -195,11 +195,12 @@ public class SqliteHelper {
 
         return arrHeroMarvel;
     }
+
     public ArrayList<HeroMarvel> getAllFavHero() {
         ArrayList<HeroMarvel> arrFavHeroMarvel = new ArrayList<HeroMarvel>();
-        Cursor c = mSqLiteDatabase.query(TABLE_NAME_FAVORITE+","+TABLE_NAME_HERO,
+        Cursor c = mSqLiteDatabase.query(TABLE_NAME_FAVORITE + "," + TABLE_NAME_HERO,
                 null,
-                IDHERO_COLUMN + "=" +ISFAV_COLUMN,
+                IDHERO_COLUMN + "=" + ISFAV_COLUMN,
                 null,
                 null,
                 null,
@@ -218,20 +219,18 @@ public class SqliteHelper {
         c.close();
 
 
-
-
-
         return arrFavHeroMarvel;
     }
+
     public ArrayList<String> getFavHero() {
         ArrayList<String> arrHeroMarvel = new ArrayList<String>();
         Cursor c = mSqLiteDatabase.query(TABLE_NAME_FAVORITE,
-                 null,
-                 null,
-                 null,
-                 null,
-                 null,
-                 null);
+                null,
+                null,
+                null,
+                null,
+                null,
+                null);
         c.moveToFirst();
         while (!c.isAfterLast()) {
             arrHeroMarvel.add(c.getString(0));
@@ -256,10 +255,10 @@ public class SqliteHelper {
 
         while (!c.isAfterLast()) {
             arrHeroMarvel.add(new HeroMarvel(c.getString(0),
-                     c.getString(1),
-                     c.getString(2),
-                     c.getString(3)));
-            System.out.println("0 "+c.getString(0)+ " 1 "+ c.getString(1)+" 2 "+ c.getString(2)+" 3 "+c.getString(3)+" fjdiojfoisdjfosdof");
+                    c.getString(1),
+                    c.getString(2),
+                    c.getString(3)));
+            System.out.println("0 " + c.getString(0) + " 1 " + c.getString(1) + " 2 " + c.getString(2) + " 3 " + c.getString(3) + " fjdiojfoisdjfosdof");
             c.moveToNext();
         }
         c.close();
